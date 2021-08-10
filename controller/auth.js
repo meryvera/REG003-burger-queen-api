@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const config = require('../config');
 const Usuario = require('../models/user');
+const bcrypt = require('bcrypt')
 
 const { secret } = config;
 
 // TODO: autenticar a la usuarix
 
-module.exports.authUsers = async (req, resp, next) => {
+module.exports.authUsers = async( req, resp, next ) => {
+    
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -15,7 +16,7 @@ module.exports.authUsers = async (req, resp, next) => {
   }
 
   const validUsuario = await Usuario.findOne({ email });
-  /*  console.log(validUsuario); */
+  console.log(validUsuario);
 
   if (!validUsuario) {
     return resp.status(400).json({
@@ -23,10 +24,10 @@ module.exports.authUsers = async (req, resp, next) => {
     });
   }
 
-  const validPassword = bcrypt.compareSync(password, validUsuario.password);
-  if (!validPassword) {
+  const validPassword = bcrypt.compareSync( password, validUsuario.password );
+  if ( !validPassword ) {
     return resp.status(400).json({
-      msg: 'Usuario / Password no son correctos - password',
+        msg: 'Usuario / Password no son correctos - password'
     });
   }
 
@@ -44,6 +45,6 @@ module.exports.authUsers = async (req, resp, next) => {
       if (err) console.error(err);
 
       return resp.status(200).json({ token });
-    },
-  );
+    }  
+  ) 
 };
