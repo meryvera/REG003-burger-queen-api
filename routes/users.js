@@ -7,7 +7,7 @@ const {
 const User = require('../models/user');
 
 const {
-  getUsers, postAdminUser,
+  getUsers, postAdminUser
 } = require('../controller/users');
 
 const initAdminUser = (app, next) => {
@@ -21,8 +21,6 @@ const initAdminUser = (app, next) => {
     password: bcrypt.hashSync(adminPassword, 10),
     roles: { admin: true },
   };
-
-  postAdminUser(adminUser, next);
 
   postAdminUser(adminUser, next);
 
