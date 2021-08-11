@@ -22,6 +22,8 @@ const initAdminUser = (app, next) => {
     roles: { admin: true },
   };
 
+  //postAdminUser(adminUser, next);
+
   postAdminUser(adminUser, next);
 
   // TODO: crear usuaria admin
